@@ -1,8 +1,9 @@
-package com.ll.spb_2023_12_19_2;
+package com.ll.spb_2023_12_19_2.controller;
 
 import com.ll.spb_2023_12_19_2.domain.Article;
 import com.ll.spb_2023_12_19_2.dto.AddArticleRequest;
 import com.ll.spb_2023_12_19_2.dto.ArticleResponse;
+import com.ll.spb_2023_12_19_2.dto.UpdateArticleRequest;
 import com.ll.spb_2023_12_19_2.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -49,5 +50,13 @@ public class BlogApiController {
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody UpdateArticleRequest request) {
+        Article updateArticle = blogService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(updateArticle);
     }
 }
